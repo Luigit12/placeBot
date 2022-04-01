@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 import fs from 'fs';
 
 const image = fs.readFileSync('2b2t2.txt', 'utf8')
-const bearer = fs.readFileSync('bearer.txt', 'utf8')
+const bearer = fs.readFileSync('bearer.txt', 'utf8').replace("\n","")
 
 let beginx = 913
 let beginy = 422

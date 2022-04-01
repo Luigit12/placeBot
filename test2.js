@@ -2,6 +2,7 @@ import fetch from 'node-fetch';
 import fs from 'fs';
 
 const image = fs.readFileSync('2b2t1.txt', 'utf8')
+const bearer = fs.readFileSync('bearer.txt', 'utf8')
 let date_ob = new Date();
 
 let beginx = 810
@@ -11,7 +12,6 @@ let y = beginy
 let color = 8
 let rows = 0
 let chars = 0
-const bearer = "Bearer 1039344334193--4gJ5G2f8ckQJUJUXo3SqQzf3AVPkA"
 
 function sleep(ms) {
     return new Promise((resolve) => {

@@ -3,7 +3,6 @@ import fs from 'fs';
 
 const image = fs.readFileSync('2b2t1.txt', 'utf8')
 const bearer = fs.readFileSync('bearer.txt', 'utf8')
-let date_ob = new Date();
 
 let beginx = 810
 let beginy = 552
@@ -19,7 +18,7 @@ function sleep(ms) {
     });
 }
 
-for (let i = 0; i < 529; i++) {
+for (let i = 0; i < image.length; i++) {
     const lines = image.split('\n')
     x = chars + beginx
     y = rows + beginy
@@ -57,6 +56,7 @@ for (let i = 0; i < 529; i++) {
     })
     const data = await response.json();
     console.log(data)
+    let date_ob = new Date();
     console.log(" at " + date_ob.getHours() + ":" + date_ob.getMinutes())
     await sleep(305000) //wait 5 mins and 5 seconds for safety
 }

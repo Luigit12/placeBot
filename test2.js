@@ -1,11 +1,11 @@
 import fetch from 'node-fetch';
 import fs from 'fs';
 
-const image = fs.readFileSync('2b2t1.txt', 'utf8')
+const image = fs.readFileSync('2b2t2.txt', 'utf8')
 const bearer = fs.readFileSync('bearer.txt', 'utf8')
 
-let beginx = 810
-let beginy = 552
+let beginx = 913
+let beginy = 422
 let x = beginx
 let y = beginy
 let color = 8

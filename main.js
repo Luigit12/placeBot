@@ -80,7 +80,8 @@ for (let i = 0; i < 10000; i++) {
   
         })
         const postData = await postResponse.json();
-        console.log(postData)
+        const postString = JSON.stringify(postData)
+        //console.log(postData)
         let date_ob = new Date();
         console.log(" at " + date_ob.getHours() + ":" + date_ob.getMinutes() + " account: " + account)
 
@@ -89,16 +90,20 @@ for (let i = 0; i < 10000; i++) {
             chars = 0
             console.log("new line")
         }
-        if (postData.toString().indexOf("error") !== -1){
+        if (postString.includes("error")){
+            console.log("error: ")
+            console.log(postString)
+
+        } else {
+            console.log(postString.includes("error"))
             chars += 1
         }
-        console.log(postData.toString().indexOf("errors"))
         
         if (rows > lines.length){
             rows = 0
             chars = 0
         }
+        console.log("\n")
     }
-    console.log(image)
     await sleep(302000) //wait 5 mins and 2 seconds for safety
 }

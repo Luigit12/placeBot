@@ -1,12 +1,12 @@
 import fetch from 'node-fetch';
 import fs from 'fs';
 
-const image = fs.readFileSync('2b2t2.txt', 'utf8')
+const image = fs.readFileSync('white.txt', 'utf8')
 const bearer = fs.readFileSync('bearer.txt', 'utf8')
 const accounts = bearer.split('\n')
 
-let beginx = 913
-let beginy = 422
+let beginx = 969
+let beginy = 486
 let x = beginx
 let y = beginy
 let color = 8
@@ -47,7 +47,7 @@ for (let i = 0; i < image.length; i++) {
             color = 3
         } else if (lines[rows][chars] == "g") { // gray
             color = 29
-        } else if (lines[rows][chars] == " ") { // white
+        } else if (lines[rows][chars] == "w") { // white
             color = 31
         } else if (lines[rows][chars] == "y") { // yellow
             color = 4
@@ -81,7 +81,7 @@ for (let i = 0; i < image.length; i++) {
         const postData = await postResponse.json();
         console.log(postData)
         let date_ob = new Date();
-        console.log(" at " + date_ob.getHours() + ":" + date_ob.getMinutes())
+        console.log(" at " + date_ob.getHours() + ":" + date_ob.getMinutes() + " account: " + account)
     }
     await sleep(305000) //wait 5 mins and 5 seconds for safety
 }

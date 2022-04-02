@@ -37,17 +37,39 @@ for (let i = 0; i < image.length; i++) {
             chars = 0
         }
 
-        if (lines[rows][chars] == "r") {
+        if (lines[rows][chars] == "r") { //red
             color = 2
-        } else if (lines[rows][chars] == "g") {
+        } else if (lines[rows][chars] == "g") { //light green
             color = 8
-        } else if (lines[rows][chars] == "b") {
+        } else if (lines[rows][chars] == "b") { //dark blue
             color = 12
+        } else if (lines[rows][chars] == "o") { //orange
+            color = 3
+        } else if (lines[rows][chars] == "g") { //gray
+            color = 29
+        } else if (lines[rows][chars] == "w") { //white
+            color = 31
+        } else if (lines[rows][chars] == "y") { //yellow
+            color = 4
+        } else if (lines[rows][chars] == "1") { //dark green
+            color = 6
+        } else if (lines[rows][chars] == "2") { //light blue
+            color = 14
+        } else if (lines[rows][chars] == "3") { //dark purple
+            color = 18
+        } else if (lines[rows][chars] == "p") { //purple
+            color = 19
+        } else if (lines[rows][chars] == "4") { //light pink
+            color = 23
+        } else if (lines[rows][chars] == "5") { //brown
+            color = 25 
+        } else if (lines[rows][chars] == "6") { //light gray
+            color = 30
         } else {
             color = 27
         }
 
-        const response = await fetch("https://gql-realtime-2.reddit.com/query", {
+        const postResponse = await fetch("https://gql-realtime-2.reddit.com/query", {
         "headers": {
             "accept": "*/*",
             "authorization": account,
@@ -56,15 +78,10 @@ for (let i = 0; i < image.length; i++) {
         "body": `{\"operationName\":\"setPixel\",\"variables\":{\"input\":{\"actionName\":\"r/replace:set_pixel\",\"PixelMessageData\":{\"coordinate\":{\"x\":${x},\"y\":${y}},\"colorIndex\":${color},\"canvasIndex\":0}}},\"query\":\"mutation setPixel($input: ActInput!) {\\n  act(input: $input) {\\n    data {\\n      ... on BasicMessage {\\n        id\\n        data {\\n          ... on GetUserCooldownResponseMessageData {\\n            nextAvailablePixelTimestamp\\n            __typename\\n          }\\n          ... on SetPixelResponseMessageData {\\n            timestamp\\n            __typename\\n          }\\n          __typename\\n        }\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\"}`,
         "method": "POST"
         })
-        const data = await response.json();
-        console.log(data)
+        const postData = await postResponse.json();
+        console.log(postData)
         let date_ob = new Date();
         console.log(" at " + date_ob.getHours() + ":" + date_ob.getMinutes())
     }
     await sleep(305000) //wait 5 mins and 5 seconds for safety
 }
-/*
-for (let i = 0; i < image.length; i++) {
-    
-}
-*/

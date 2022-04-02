@@ -16,7 +16,7 @@ function sleep(ms) {
 }
 
 for (let i = 0; i < 10000; i++) {
-    let image = fs.readFileSync('monero.txt', 'utf8')
+    let image = fs.readFileSync('92.txt', 'utf8')
     let bearer = fs.readFileSync('bearer.txt', 'utf8')
     let accounts = bearer.split('\n')
 

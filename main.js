@@ -1,12 +1,12 @@
 import fetch from 'node-fetch';
 import fs from 'fs';
 
-const image = fs.readFileSync('white.txt', 'utf8')
+const image = fs.readFileSync('monero.txt', 'utf8')
 const bearer = fs.readFileSync('bearer.txt', 'utf8')
 const accounts = bearer.split('\n')
 
 let beginx = 969
-let beginy = 486
+let beginy = 498
 let x = beginx
 let y = beginy
 let color = 8
@@ -28,7 +28,7 @@ for (let i = 0; i < image.length; i++) {
         if (chars > lines[rows].length) {
             rows += 1
             chars = 0
-        } else {
+        } else{
             chars += 1
         }
         
@@ -45,7 +45,7 @@ for (let i = 0; i < image.length; i++) {
             color = 12
         } else if (lines[rows][chars] == "o") { // orange
             color = 3
-        } else if (lines[rows][chars] == "g") { // gray
+        } else if (lines[rows][chars] == "x") { // gray
             color = 29
         } else if (lines[rows][chars] == "w") { // white
             color = 31
@@ -83,5 +83,5 @@ for (let i = 0; i < image.length; i++) {
         let date_ob = new Date();
         console.log(" at " + date_ob.getHours() + ":" + date_ob.getMinutes() + " account: " + account)
     }
-    await sleep(305000) //wait 5 mins and 5 seconds for safety
+    await sleep(302000) //wait 5 mins and 2 seconds for safety
 }

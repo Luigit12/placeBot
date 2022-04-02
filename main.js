@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import fs from 'fs';
 
-let beginx = 76
+let beginx = 781
 let beginy = 78
 let x = beginx
 let y = beginy
@@ -88,10 +88,11 @@ for (let i = 0; i < 10000; i++) {
             rows += 1
             chars = 0
             console.log("new line")
-        } else if (postData.toString().indexOf("errors: [") != -1){
+        }
+        if (postData.toString().indexOf("error") !== -1){
             chars += 1
         }
-        console.log(postData.toString().indexOf("errors: ["))
+        console.log(postData.toString().indexOf("errors"))
         
         if (rows > lines.length){
             rows = 0

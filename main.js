@@ -37,35 +37,35 @@ for (let i = 0; i < image.length; i++) {
             chars = 0
         }
 
-        if (lines[rows][chars] == "r") { //red
+        if (lines[rows][chars] == "r") { // red
             color = 2
-        } else if (lines[rows][chars] == "g") { //light green
+        } else if (lines[rows][chars] == "g") { // light green
             color = 8
-        } else if (lines[rows][chars] == "b") { //dark blue
+        } else if (lines[rows][chars] == "b") { // dark blue
             color = 12
-        } else if (lines[rows][chars] == "o") { //orange
+        } else if (lines[rows][chars] == "o") { // orange
             color = 3
-        } else if (lines[rows][chars] == "g") { //gray
+        } else if (lines[rows][chars] == "g") { // gray
             color = 29
-        } else if (lines[rows][chars] == "w") { //white
+        } else if (lines[rows][chars] == " ") { // white
             color = 31
-        } else if (lines[rows][chars] == "y") { //yellow
+        } else if (lines[rows][chars] == "y") { // yellow
             color = 4
-        } else if (lines[rows][chars] == "1") { //dark green
+        } else if (lines[rows][chars] == "1") { // dark green
             color = 6
-        } else if (lines[rows][chars] == "2") { //light blue
+        } else if (lines[rows][chars] == "2") { // light blue
             color = 14
-        } else if (lines[rows][chars] == "3") { //dark purple
+        } else if (lines[rows][chars] == "3") { // dark purple
             color = 18
-        } else if (lines[rows][chars] == "p") { //purple
+        } else if (lines[rows][chars] == "p") { // purple
             color = 19
-        } else if (lines[rows][chars] == "4") { //light pink
+        } else if (lines[rows][chars] == "4") { // light pink
             color = 23
-        } else if (lines[rows][chars] == "5") { //brown
+        } else if (lines[rows][chars] == "5") { // brown
             color = 25 
-        } else if (lines[rows][chars] == "6") { //light gray
+        } else if (lines[rows][chars] == "6") { // light gray
             color = 30
-        } else {
+        } else { // if it doesnt recognize the character it just puts black
             color = 27
         }
 

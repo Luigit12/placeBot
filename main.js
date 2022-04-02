@@ -1,10 +1,6 @@
 import fetch from 'node-fetch';
 import fs from 'fs';
 
-const image = fs.readFileSync('monero.txt', 'utf8')
-const bearer = fs.readFileSync('bearer.txt', 'utf8')
-const accounts = bearer.split('\n')
-
 let beginx = 969
 let beginy = 498
 let x = beginx
@@ -19,7 +15,11 @@ function sleep(ms) {
     });
 }
 
-for (let i = 0; i < image.length; i++) {
+for (let i = 0; i < 10000; i++) {
+    let image = fs.readFileSync('monero.txt', 'utf8')
+    let bearer = fs.readFileSync('bearer.txt', 'utf8')
+    let accounts = bearer.split('\n')
+
     for (const account of accounts) {
         const lines = image.split('\n')
         x = chars + beginx
@@ -83,5 +83,6 @@ for (let i = 0; i < image.length; i++) {
         let date_ob = new Date();
         console.log(" at " + date_ob.getHours() + ":" + date_ob.getMinutes() + " account: " + account)
     }
+    console.log(image)
     await sleep(302000) //wait 5 mins and 2 seconds for safety
 }

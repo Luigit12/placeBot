@@ -6,8 +6,8 @@ let beginy = 486
 let x = beginx
 let y = beginy
 let color = 8
-let rows = 0
-let chars = 8
+let rows = 1
+let chars = 6
 
 function sleep(ms) {
     return new Promise((resolve) => {
@@ -30,6 +30,12 @@ for (let i = 0; i < 10000; i++) {
             rows += 1
             chars = 0
             console.log("new line!")
+        }
+
+        if (rows > lines.length){
+            rows = 0
+            chars = 0
+            console.log("reset")
         }
 
         if (lines[rows][chars] == "r") { // red
@@ -91,11 +97,6 @@ for (let i = 0; i < 10000; i++) {
             chars += 1
         }
         
-        if (rows > lines.length){
-            rows = 0
-            chars = 0
-            console.log("reset")
-        }
         console.log("\n")
     }
     await sleep(302000) //wait 5 mins and 2 seconds for safety

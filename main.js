@@ -3,12 +3,12 @@ import fs from 'fs';
 
 let image = fs.readFileSync('92_2.txt', 'utf8')
 
-let beginx = 917
-let beginy = 486
+let beginx = 769
+let beginy = 0
 let x = beginx
 let y = beginy
 let color = 8
-let rows = 1
+let rows = 0
 let chars = 0
 
 function sleep(ms) {
@@ -27,7 +27,7 @@ for (let u = 0; u < 10; i++) {
             const lines = image.split('\n')
             x = chars + beginx
             y = rows + beginy
-            console.log(`(${x},${y})`)
+            console.log(lines[rows])
 
             if (chars > lines[rows].length) {
                 rows += 1
@@ -75,7 +75,7 @@ for (let u = 0; u < 10; i++) {
                 "authorization": account.trim(),
                 "content-type": "application/json",
             },
-            "body": `{\"operationName\":\"setPixel\",\"variables\":{\"input\":{\"actionName\":\"r/replace:set_pixel\",\"PixelMessageData\":{\"coordinate\":{\"x\":${x},\"y\":${y}},\"colorIndex\":${color},\"canvasIndex\":0}}},\"query\":\"mutation setPixel($input: ActInput!) {\\n  act(input: $input) {\\n    data {\\n      ... on BasicMessage {\\n        id\\n        data {\\n          ... on GetUserCooldownResponseMessageData {\\n            nextAvailablePixelTimestamp\\n            __typename\\n          }\\n          ... on SetPixelResponseMessageData {\\n            timestamp\\n            __typename\\n          }\\n          __typename\\n        }\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\"}`,
+            "body": `{\"operationName\":\"setPixel\",\"variables\":{\"input\":{\"actionName\":\"r/replace:set_pixel\",\"PixelMessageData\":{\"coordinate\":{\"x\":${x},\"y\":${y}},\"colorIndex\":${color},\"canvasIndex\":3}}},\"query\":\"mutation setPixel($input: ActInput!) {\\n  act(input: $input) {\\n    data {\\n      ... on BasicMessage {\\n        id\\n        data {\\n          ... on GetUserCooldownResponseMessageData {\\n            nextAvailablePixelTimestamp\\n            __typename\\n          }\\n          ... on SetPixelResponseMessageData {\\n            timestamp\\n            __typename\\n          }\\n          __typename\\n        }\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\"}`,
             "method": "POST"
 
             })
@@ -84,20 +84,19 @@ for (let u = 0; u < 10; i++) {
             //console.log(postData)
             let date_ob = new Date();
             console.log(" at " + date_ob.getHours() + ":" + date_ob.getMinutes() + " account: " + account)
+            console.log("char: " + chars + " on row: " + rows)
+            console.log(`(${x},${y})`)
 
             if (postString.includes("error")){
                 console.log("error: ")
                 console.log(postString)
-
             } else {
                 chars += 1
             }
-            
             console.log("\n")
-            console.log("char: " + chars + " on row: " + rows)
         }
         console.log("\n")
-        await sleep(302000) //wait 5 mins and 2 seconds for safety
+        await sleep(302000) // wait 5 mins and 2 seconds for safety
     }
     rows = 0
     chars = 0

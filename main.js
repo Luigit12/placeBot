@@ -1,8 +1,8 @@
 import fetch from 'node-fetch';
 import fs from 'fs';
 
-let beginx = 281
-let beginy = 15
+let beginx = 31
+let beginy = 827
 let x = beginx
 let y = beginy
 let color = 8

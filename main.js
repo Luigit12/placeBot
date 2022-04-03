@@ -7,7 +7,7 @@ let x = beginx
 let y = beginy
 let color = 8
 let rows = 0
-let chars = 0
+let chars = 3
 
 function sleep(ms) {
     return new Promise((resolve) => {

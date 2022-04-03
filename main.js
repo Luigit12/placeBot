@@ -6,8 +6,8 @@ let beginy = 486
 let x = beginx
 let y = beginy
 let color = 8
-let rows = 1
-let chars = 6
+let rows = 2
+let chars = 10
 
 function sleep(ms) {
     return new Promise((resolve) => {

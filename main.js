@@ -18,7 +18,7 @@ function sleep(ms) {
 }
 
 for (let u = 0; u < 10; i++) {
-    for (let i = 0; i < image.length; i++) {
+    for (let i = 0; i < (image.length - 1); i++) {
         let image = fs.readFileSync('92_2.txt', 'utf8')
         let bearer = fs.readFileSync('bearer.txt', 'utf8')
         let accounts = bearer.split('\n')
@@ -94,7 +94,9 @@ for (let u = 0; u < 10; i++) {
             }
             
             console.log("\n")
+            console.log("char: " + chars + " on row: " + rows)
         }
+        console.log("\n")
         await sleep(302000) //wait 5 mins and 2 seconds for safety
     }
     rows = 0

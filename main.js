@@ -8,7 +8,7 @@ let beginy = 486
 let x = beginx
 let y = beginy
 let color = 8
-let rows = 0
+let rows = 1
 let chars = 0
 
 function sleep(ms) {

@@ -68,7 +68,7 @@ for (let i = 0; i < 10000; i++) {
             color = 30
         } else if (lines[rows][chars] == "q") { // black
             color = 27
-        } else { // if it doesnt recognize the character it just puts black
+        } else { // if it doesnt recognize the character it just puts white
             color = 31
         }
 
@@ -93,7 +93,6 @@ for (let i = 0; i < 10000; i++) {
             console.log(postString)
 
         } else {
-            console.log(postString.includes("error"))
             chars += 1
         }
         

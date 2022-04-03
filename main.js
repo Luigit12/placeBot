@@ -58,7 +58,7 @@ for (let i = 0; i < 10000; i++) {
         } else if (lines[rows][chars] == "q") { // black
             color = 27
         } else { // if it doesnt recognize the character it just puts black
-            color = 27
+            color = 31
         }
 
         const postResponse = await fetch("https://gql-realtime-2.reddit.com/query", {

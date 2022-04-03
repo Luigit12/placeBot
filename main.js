@@ -7,7 +7,7 @@ let x = beginx
 let y = beginy
 let color = 8
 let rows = 0
-let chars = 3
+let chars = 0
 
 function sleep(ms) {
     return new Promise((resolve) => {
@@ -26,6 +26,11 @@ for (let i = 0; i < 10000; i++) {
         y = rows + beginy
         console.log(`(${x},${y})`)
 
+        if (chars > lines[rows].length) {
+            rows += 1
+            chars = 0
+            console.log("new line!")
+        }
 
         if (lines[rows][chars] == "r") { // red
             color = 2
@@ -77,11 +82,6 @@ for (let i = 0; i < 10000; i++) {
         let date_ob = new Date();
         console.log(" at " + date_ob.getHours() + ":" + date_ob.getMinutes() + " account: " + account)
 
-        if (chars > lines[rows].length) {
-            rows += 1
-            chars = 0
-            console.log("new line")
-        }
         if (postString.includes("error")){
             console.log("error: ")
             console.log(postString)
@@ -94,6 +94,7 @@ for (let i = 0; i < 10000; i++) {
         if (rows > lines.length){
             rows = 0
             chars = 0
+            console.log("reset")
         }
         console.log("\n")
     }

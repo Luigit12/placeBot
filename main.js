@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import fs from 'fs';
 
-let beginx = 282
+let beginx = 281
 let beginy = 15
 let x = beginx
 let y = beginy

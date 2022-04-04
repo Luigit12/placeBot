@@ -3,13 +3,14 @@ import fs from 'fs';
 
 let image = fs.readFileSync('92_2.txt', 'utf8')
 
-let beginx = 769
-let beginy = 0
+let beginx = 565
+let beginy = 81
 let x = beginx
 let y = beginy
 let color = 8
-let rows = 0
+let rows = 1
 let chars = 0
+let canvasIndex = 3
 
 function sleep(ms) {
     return new Promise((resolve) => {
@@ -17,9 +18,12 @@ function sleep(ms) {
     });
 }
 
+
+
 for (let u = 0; u < 10; i++) {
     for (let i = 0; i < (image.length - 1); i++) {
         let image = fs.readFileSync('92_2.txt', 'utf8')
+        let accountsList = fs.readFileSync('accounts.txt', 'utf8').split("\n")
         let bearer = fs.readFileSync('bearer.txt', 'utf8')
         let accounts = bearer.split('\n')
 
@@ -69,13 +73,25 @@ for (let u = 0; u < 10; i++) {
                 color = 31
             }
 
+            const goodAccountResponse = await fetch("https://gql-realtime-2.reddit.com/query", {
+                "headers": {
+                "accept": "*/*",
+                "authorization": account.trim(),
+                "content-type": "application/json",
+                },
+                "body": `{\"operationName\":\"pixelHistory\",\"variables\":{\"input\":{\"actionName\":\"r/replace:get_tile_history\",\"PixelMessageData\":{\"coordinate\":{\"x\":${x},\"y\":${y}},\"colorIndex\":${color},\"canvasIndex\":${canvasIndex}}}},\"query\":\"mutation pixelHistory($input: ActInput!) {\\n  act(input: $input) {\\n    data {\\n      ... on BasicMessage {\\n        id\\n        data {\\n          ... on GetTileHistoryResponseMessageData {\\n            lastModifiedTimestamp\\n            userInfo {\\n              userID\\n              username\\n              __typename\\n            }\\n            __typename\\n          }\\n          __typename\\n        }\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\"}`,
+                "method": "POST",
+            });
+            const goodAccount = await goodAccountResponse.json();
+            console.log(goodAccount.data.act.data[0].data.userInfo.username)
+
             const postResponse = await fetch("https://gql-realtime-2.reddit.com/query", {
             "headers": {
                 "accept": "*/*",
                 "authorization": account.trim(),
                 "content-type": "application/json",
             },
-            "body": `{\"operationName\":\"setPixel\",\"variables\":{\"input\":{\"actionName\":\"r/replace:set_pixel\",\"PixelMessageData\":{\"coordinate\":{\"x\":${x},\"y\":${y}},\"colorIndex\":${color},\"canvasIndex\":3}}},\"query\":\"mutation setPixel($input: ActInput!) {\\n  act(input: $input) {\\n    data {\\n      ... on BasicMessage {\\n        id\\n        data {\\n          ... on GetUserCooldownResponseMessageData {\\n            nextAvailablePixelTimestamp\\n            __typename\\n          }\\n          ... on SetPixelResponseMessageData {\\n            timestamp\\n            __typename\\n          }\\n          __typename\\n        }\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\"}`,
+            "body": `{\"operationName\":\"setPixel\",\"variables\":{\"input\":{\"actionName\":\"r/replace:set_pixel\",\"PixelMessageData\":{\"coordinate\":{\"x\":${x},\"y\":${y}},\"colorIndex\":${color},\"canvasIndex\":${canvasIndex}}}},\"query\":\"mutation setPixel($input: ActInput!) {\\n  act(input: $input) {\\n    data {\\n      ... on BasicMessage {\\n        id\\n        data {\\n          ... on GetUserCooldownResponseMessageData {\\n            nextAvailablePixelTimestamp\\n            __typename\\n          }\\n          ... on SetPixelResponseMessageData {\\n            timestamp\\n            __typename\\n          }\\n          __typename\\n        }\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\"}`,
             "method": "POST"
 
             })
@@ -87,7 +103,12 @@ for (let u = 0; u < 10; i++) {
             console.log("char: " + chars + " on row: " + rows)
             console.log(`(${x},${y})`)
 
-            if (postString.includes("error")){
+            if (accountsList.includes(goodAccount.data.act.data[0].data.userInfo.username)) {
+                chars += 1
+                console.log("Already a good pixel!")
+            }
+
+            if (postString.includes("error")) {
                 console.log("error: ")
                 console.log(postString)
             } else {
